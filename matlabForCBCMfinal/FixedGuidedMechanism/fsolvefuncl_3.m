@@ -1,0 +1,41 @@
+function y=fsolvefuncl_3(x)
+global t1 t2 t3 L1 L2 L3 E1 E2 E3 I1 I2 I3 L delt_y theta1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+m1=x(1);
+f1=x(2);
+p1=x(3);
+delt_y1=x(4);
+delt_x1=x(5);
+alpha1=x(6);
+m2=x(7);
+f2=x(8);
+p2=x(9);
+delt_y2=x(10);
+delt_x2=x(11);
+alpha2=x(12);
+m3=x(13);
+f3=x(14);
+p3=x(15);
+delt_y3=x(16);
+delt_x3=x(17);
+alpha3=x(18);
+
+y1=12*delt_y1-6*alpha1+p1*(1.2*delt_y1-0.1*alpha1)-f1+p1^2*[-1/700 1/1400]*[delt_y1;alpha1];
+y2=-6*delt_y1+4*alpha1+p1*(-0.1*delt_y1+2/15*alpha1)-m1+p1^2*[1/1400 -11/6300]*[delt_y1;alpha1];
+y3=t1^2*p1/(12*L1^2)+[delt_y1 alpha1]*[-0.6 0.05;0.05 -1/15]*[delt_y1;alpha1]-delt_x1+p1*[delt_y1 alpha1]*[1/700 -1/1400;-1/1400 11/6300]*[delt_y1;alpha1];
+y4=[12 -6]*[delt_y2;alpha2]+p2*[1.2 -0.1]*[delt_y2;alpha2]-f2+p2^2*[-1/700 1/1400]*[delt_y2;alpha2];
+y5=[-6 4]*[delt_y2;alpha2]+p2*[-0.1 2/15]*[delt_y2;alpha2]-m2+p2^2*[1/1400 -11/6300]*[delt_y2;alpha2];
+y6=t2^2*p2/(12*L2^2)+[delt_y2 alpha2]*[-0.6 0.05;0.05 -1/15]*[delt_y2;alpha2]-delt_x2+p2*[delt_y2 alpha2]*[1/700 -1/1400;-1/1400 11/6300]*[delt_y2;alpha2];
+y7=[12 -6]*[delt_y3;alpha3]+p3*[1.2 -0.1]*[delt_y3;alpha3]-f3+p3^2*[-1/700 1/1400]*[delt_y3;alpha3];
+y8=[-6 4]*[delt_y3;alpha3]+p3*[-0.1 2/15]*[delt_y3;alpha3]-m3+p3^2*[1/1400 -11/6300]*[delt_y3;alpha3];
+y9=t3^2*p3/(12*L3^2)+[delt_y3 alpha3]*[-0.6 0.05;0.05 -1/15]*[delt_y3;alpha3]-delt_x3+p3*[delt_y3 alpha3]*[1/700 -1/1400;-1/1400 11/6300]*[delt_y3;alpha3];
+y10=(cos(alpha1)*p2-sin(alpha1)*f2)*E2*I2/L2^2-p1*E1*I1/L1^2;
+y11=(cos(alpha1)*f2+sin(alpha1)*p2)*E2*I2/L2^2-f1*E1*I1/L1^2;
+y12=m1*E1*I1/L1-(m2*E2*I2/L2+f2*E2*I2/L2*(1+delt_x2)-p2*E2*I2/L2*(delt_y2));
+y13=(cos(alpha1+alpha2)*p3-sin(alpha1+alpha2)*f3)*E3*I3/L3^2-p1*E2*I2/L2^2;
+y14=(cos(alpha1+alpha2)*f3+sin(alpha1+alpha2)*p3)*E3*I3/L3^2-f1*E2*I2/L2^2;
+y15=m2*E2*I2/L2-(m3*E3*I3/L3+f3*E3*I3/L3*(1+delt_x3)-p3*E3*I3/L3*(delt_y3));
+y16=cos(alpha1+alpha2)*(L3*delt_x3+L3)-sin(alpha1+alpha2)*L3*delt_y3+cos(alpha1)*(L2*delt_x2+L2)-sin(alpha1)*L2*delt_y2+(L1*delt_x1+L1)-(L-delt_y*sin(theta1));
+y17=sin(alpha1+alpha2)*(L3*delt_x3+L3)+cos(alpha1+alpha2)*L3*delt_y3+sin(alpha1)*(L2*delt_x2+L2)+cos(alpha1)*L2*delt_y2+(L1*delt_y1)+(delt_y*cos(theta1));
+y18=alpha1+alpha2+alpha3;
+y=[y1;y2;y3;y4;y5;y6;y7;y8;y9;y10;y11;y12;y13;y14;y15;y16;y17;y18];
